@@ -2,22 +2,22 @@ import java.util.Scanner;
 
 /**
  * @author Carson Fiechtner
- * A DefensiveInvestor wants to receive a respectable ROI
- * while keeping their work load relatively low
+ * An AggressiveInvestor is prepared to invest more time and
+ * effort in exchange for a greater potential reward
  * 
- * Because of this, a DefensiveInvestor generally prefer
- * stocks with low volatility, high dividends, low risk, etc
+ * Because of this, an AggressiveInvestor is less dismayed by
+ * sub-par fundamentals, and focus more on growth.
  * 
  * NOTE: While consideration was placed into what a typical
- * defensive investor values, deductions are calculated using
+ * aggressive investor values, deductions are calculated using
  * arbitrary values
  */
-public class DefensiveInvestor extends BasicInvestor{
+public class AggressiveInvestor extends BasicInvestor{
 
 	/**
-	 * Default constructor for a defensive investor
+	 * Default constructor for a aggressive investor
 	 */
-	public DefensiveInvestor(){}
+	public AggressiveInvestor(){}
 
 	/**
 	 * Allows the user to input info about their stock
@@ -35,11 +35,8 @@ public class DefensiveInvestor extends BasicInvestor{
 		setInstPercent(input.nextDouble());
 		System.out.println("What is the stock's Debt-to-Equity Ratio?");
 		setDE_Ratio(input.nextDouble());
-		System.out.println("Has your stock maintained consistent earnings for at least 10 years? (Y/N)");
-		setConsistentEarnings(booleanConvert(input.next()));
-		System.out.println("If applicable, has your stock maintained consistent dividend payments? (Y/N)");
-		System.out.println("If not applicable, please enter \"Y\" ");
-		setConsistentDividends(booleanConvert(input.next()));
+		System.out.println("What is your stock's Price-to-Sales Ratio?");
+		setPS_Ratio(input.nextDouble());
 	}
 
 	/**
@@ -47,21 +44,19 @@ public class DefensiveInvestor extends BasicInvestor{
 	 */
 	public void calculateScore(){
 		if(marketValue < 2)
-			deductions += 5*(2-marketValue);
+			deductions += 2*(2-marketValue);
 		if(annualEarningsGrowth < 4)
-			deductions += 2*(4 - annualEarningsGrowth);
+			deductions += 5*(4 - annualEarningsGrowth);
 		if(peRatio > 15)
-			deductions += 1.5 * (peRatio - 15);
+			deductions += (peRatio - 15);
 		if(pbRatio > 1.5)
-			deductions += 1.5 * (pbRatio - 1.5);
+			deductions += (pbRatio - 1.5);
 		if(institutionPercent > 60)
-			deductions += (institutionPercent - 60);
+			deductions += 2*(institutionPercent - 60);
 		if(debtEquityRatio > 2)
-			deductions += 5*(debtEquityRatio-2);
-		if(!consistentEarnings)
-			deductions += 10;
-		if(!consistentDividends)
-			deductions += 10;
+			deductions += 2*(debtEquityRatio-2);
+		if(psRatio > 4)
+			deductions += 2.5*(psRatio - 4);
 		score = score - deductions;
 	}
 
@@ -75,10 +70,10 @@ public class DefensiveInvestor extends BasicInvestor{
 
 	public static void main(String[] args){
 		boolean newStock = true;
-		DefensiveInvestor stock;
+		AggressiveInvestor stock;
 		Scanner check = new Scanner(System.in);
 		while(newStock){
-			stock = new DefensiveInvestor();
+			stock = new AggressiveInvestor();
 			stock.getStockInfo(check);
 			stock.calculateScore();
 			System.out.println("Your stock's score is: " + stock.getScore() + "/100");

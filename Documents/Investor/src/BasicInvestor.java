@@ -2,7 +2,7 @@
 /**
  * @author Carson Fiechtner
  * Description:
- * An interface that contains the basic instance variables and methods
+ * An abstract class that contains the basic instance variables and methods
  * for ranking stocks
  */
 public abstract class BasicInvestor {
@@ -11,7 +11,7 @@ public abstract class BasicInvestor {
 	
 	//Instance variables for score calculation
 	protected double marketValue = 0, annualEarningsGrowth = 0, peRatio = 0, 
-			pbRatio = 0, institutionPercent = 0, debtEquityRatio = 0;
+			pbRatio = 0, institutionPercent = 0, debtEquityRatio = 0, psRatio = 0;
 	protected boolean consistentEarnings = false, consistentDividends = false;
 	/**
 	 * Sets the value of the marketValue variable
@@ -30,16 +30,16 @@ public abstract class BasicInvestor {
 	}
 	
 	/**
-	 * Sets the value of the p_eRatio variable
-	 * @param pe The new value of p_eRatio
+	 * Sets the value of the peRatio variable
+	 * @param pe The new value of peRatio
 	 */
 	protected void setPE_Ratio(double pe){
 		peRatio = pe;
 	}
 	
 	/**
-	 * Sets the value of the p_bRatio variable
-	 * @param pb The new value of p_bRatio
+	 * Sets the value of the pbRatio variable
+	 * @param pb The new value of pbRatio
 	 */
 	protected void setPB_Ratio(double pb){
 		pbRatio = pb;
@@ -54,11 +54,19 @@ public abstract class BasicInvestor {
 	}
 	
 	/**
-	 * Sets the value of the assetLiabilityRatio variable
-	 * @param al The new value of assetLiabilityRatio
+	 * Sets the value of the debtEquityRatio variable
+	 * @param de The new value of debtEquityRatio
 	 */
 	protected void setDE_Ratio(double de){
 		debtEquityRatio = de;
+	}
+	
+	/**
+	 * Sets the value of the psRatio variable
+	 * @param al The new value of assetLiabilityRatio
+	 */
+	protected void setPS_Ratio(double ps){
+		psRatio = ps;
 	}
 	
 	/**
